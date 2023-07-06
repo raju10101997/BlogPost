@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+{% extends "base/base.html" %}
+{% block title %}
+RAJ'S BLOG
+{% endblock title %}
+
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    {% block content %}
+    <h1>RAJ'S BLOG</h1>
+    {% for post in post_list %}
+    <h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
+    <p id="date">Published on {{ post.publish }} by {{ post.author | title }}</p>
+    {{ post.body | truncatewords:30 | linebreaks }}
+    {% endfor %}
+    {% include "base/pagination.html" with page=post_list %}
+    {% endblock content %}
+</body>
+
+</html>
